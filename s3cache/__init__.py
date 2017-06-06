@@ -183,7 +183,7 @@ class AmazonS3Cache(BaseCache):
             return
 
         try:
-            keylist = self._storage.bucket.get_all_keys(prefix=self._location)
+            #keylist = self._storage.bucket.get_all_keys(prefix=self._location)
             keylist = [f.key for f in self._storage.bucket.objects.filter(Prefix=self._location)]
         except (IOError, OSError):
             return
@@ -203,7 +203,7 @@ class AmazonS3Cache(BaseCache):
         """
             There seems to be an artificial limit of 1000
         """
-        return len(self._storage.bucket.objects.filter(Prefix=self._location))
+        return sum(1 for _ in self._storage.bucket.objects.filter(Prefix=self._location))
     _num_entries = property(_get_num_entries)
 
     def clear(self):
