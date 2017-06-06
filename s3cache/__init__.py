@@ -194,7 +194,8 @@ class AmazonS3Cache(BaseCache):
             doomed = [k for (i, k) in enumerate(keylist) if i % frequency == 0]
 
         try:
-            self._storage.bucket.delete_keys(doomed, quiet=True)
+            self._storage.connection.delete_objects(Bucket=self._storage.bucket_name, Delete=[{ 'Key': k } for k in doomed])
+            #self._storage.bucket.delete_keys(doomed, quiet=True)
         except (IOError, OSError):
             pass
 
