@@ -28,7 +28,7 @@ config = {
         'Framework :: Django',
     ],
     'zip_safe' : False,
-    'install_requires' : ['boto', 'django-storages>=1.1.8', 'Django'],
+    'install_requires' : ['boto3', 'django-storages>=1.1.8', 'Django'],
 }
 
 if (len(sys.argv) >= 2) and (sys.argv[1] == '--requires'):
